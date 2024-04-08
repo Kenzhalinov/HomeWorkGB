@@ -6,16 +6,24 @@ import (
 )
 
 func main() {
-	arr := [5]string{"1", "2", "3", "4", "5"}
-	fmt.Println("Введите элементы массива через пробел:")
-	_, _ = fmt.Scan(&arr)
+
+	arr := []string{"one", "two", "three", "foo", "five", "six"}
 
 	randomInt := rand.Intn(3) + 1
-	// newArr := make([]string, len(arr)
+
+	newArr := make([]string, len(arr))
+	copy(newArr, arr)
+
+	for i := range newArr {
+		j := rand.Intn(i + 1)
+		newArr[i], newArr[j] = newArr[j], newArr[i]
+	}
+
 	result := make([]string, 0, randomInt)
 
-	for i := 0; i < randomInt && i < len(arr); i++ {
-		result = append(result, arr[i])
+	for i := 0; i < randomInt && i < len(newArr); i++ {
+
+		result = append(result, newArr[i])
 	}
 	fmt.Println(result)
 }
